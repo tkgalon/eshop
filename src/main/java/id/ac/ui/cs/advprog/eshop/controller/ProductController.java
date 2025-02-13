@@ -33,7 +33,7 @@ public class ProductController {
     public String editProductPage(@PathVariable String id, Model model) {
         Product product = service.findById(id);
         if (product == null) {
-            return "redirect:list"; // Jika produk tidak ditemukan, redirect ke daftar produk
+            return "redirect:list";
         }
         model.addAttribute("product", product);
         return "EditProduct";
