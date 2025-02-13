@@ -25,6 +25,15 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createProductPost(@ModelAttribute Product product, Model model) {
+        if (product.getProductName() == null || product.getProductName().isEmpty()) {
+            model.addAttribute("error", "Product name is required");
+            return "CreateProduct";
+        }
+        if (product.getProductQuantity() < 0) {
+            model.addAttribute("error", "Quantity cannot be negative");
+            return "CreateProduct";
+        }
+
         service.create(product);
         return "redirect:list";
     }
