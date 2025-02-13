@@ -49,7 +49,16 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public String editProductPost(@ModelAttribute Product product) {
+    public String editProductPost(@ModelAttribute Product product, Model model) {
+        if (product.getProductName() == null || product.getProductName().isEmpty()) {
+            model.addAttribute("error", "Product name is required");
+            return "EditProduct";
+        }
+        if (product.getProductQuantity() < 0) {
+            model.addAttribute("error", "Quantity cannot be negative");
+            return "EditProduct";
+        }
+
         service.edit(product);
         return "redirect:list";
     }

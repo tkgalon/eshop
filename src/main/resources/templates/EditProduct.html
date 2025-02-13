@@ -10,6 +10,11 @@
 <div class="container">
   <h3>Edit Product</h3>
 
+  <!-- Pesan error jika ada -->
+  <div th:if="${error}" class="alert alert-danger">
+    <span th:text="${error}"></span>
+  </div>
+
   <form th:action="@{/product/edit}" th:object="${product}" method="post">
     <div class="form-group">
       <label for="nameInput">Name</label>
