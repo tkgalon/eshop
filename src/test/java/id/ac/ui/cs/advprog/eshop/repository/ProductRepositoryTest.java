@@ -64,4 +64,56 @@ class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testEditProductSuccess() {
+        Product product = new Product();
+        product.setProductId("12345");
+        product.setProductName("Nama lama Tono");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId("12345");
+        updatedProduct.setProductName("Nama baru Tono");
+        updatedProduct.setProductQuantity(20);
+
+        Product result = productRepository.edit(updatedProduct);
+
+        assertNotNull(result);
+        assertEquals("Nama baru Tono", result.getProductName());
+        assertEquals(20, result.getProductQuantity());
+    }
+
+    @Test
+    void testEditProductNotFound() {
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId("99999");
+        updatedProduct.setProductName("Hanyalah fiktif belaka");
+        updatedProduct.setProductQuantity(30);
+
+        Product result = productRepository.edit(updatedProduct);
+        assertNull(result);
+    }
+
+    @Test
+    void testDeleteProductSuccess() {
+        Product product = new Product();
+        product.setProductId("54321");
+        product.setProductName("Pengen di-delete");
+        product.setProductQuantity(5);
+        productRepository.create(product);
+
+        productRepository.delete("54321");
+
+        Product deletedProduct = productRepository.findById("54321");
+        assertNull(deletedProduct);
+    }
+
+    @Test
+    void testDeleteProductNotFound() {
+        productRepository.delete("00000"); // Trying to delete non-existent product
+        assertNull(productRepository.findById("00000"));
+    }
+
 }
