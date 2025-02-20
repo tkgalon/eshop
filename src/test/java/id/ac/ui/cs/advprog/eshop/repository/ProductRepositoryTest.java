@@ -66,6 +66,27 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testFindByIdExistingProduct() {
+        Product product = new Product();
+        product.setProductId("123");
+        product.setProductName("Produk Ada");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+
+        Product foundProduct = productRepository.findById("123");
+
+        assertNotNull(foundProduct);
+        assertEquals("123", foundProduct.getProductId());
+    }
+    @Test
+    void testFindByIdNonExistentProduct() {
+        Product foundProduct = productRepository.findById("GAADA BRO");
+        assertNull(foundProduct);
+    }
+
+
+
+    @Test
     void testEditProductSuccess() {
         Product product = new Product();
         product.setProductId("12345");
@@ -95,6 +116,24 @@ class ProductRepositoryTest {
         Product result = productRepository.edit(updatedProduct);
         assertNull(result);
     }
+
+    @Test
+    void testEditProductWithNullId() {
+        Product product = new Product();
+        product.setProductId("valid-id");
+        product.setProductName("Produk Awal");
+        product.setProductQuantity(50);
+        productRepository.create(product);
+
+        Product product2 = new Product();
+        product2.setProductId("");
+        product2.setProductName("Produk Baru");
+        product2.setProductQuantity(20);
+
+        Product editedProduct = productRepository.edit(product2);
+        assertNull(editedProduct);
+    }
+
 
     @Test
     void testDeleteProductSuccess() {
