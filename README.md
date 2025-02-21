@@ -76,3 +76,26 @@ Tentunya functional test tersebut akan membuat redundasi kode kita, dimana memil
 Hal ini mungkin akan menyalahi konsep _clean code_ yang mengedepankan prinsip menghindari redundansi fungsi yang sama.
 Redundansi ini bisa menyebabkan kesulitan dalam pemeliharaan dan pengembangan lebih lanjut karena setiap perubahan yang diperlukan di satu bagian kode harus diperbarui di berbagai tempat.
 Mungkin saran saya, Jika bisa kita buat file untuk setup struktur testnya sehingga bisa diinherit ( mungkin ) oleh functional test lainnya, yang mana akan mengurangi redundansi kode.
+
+
+
+## Reflection Modul 2
+
+###  Code Quality Issues & Fixes
+Selama proses CI/CD ini, ada beberapa **masalah kualitas kode** yang berhasil diperbaiki:
+1. **Unused Import**
+    - Masalah ini terjadi karena terdapat import yang tidak digunakan di `ProductController.java`.  Oleh karena itu, saya menghapus import yang tidak digunakan dan menggantinya dengan mengimport spesifik library untuk meningkatkan efisiensi kode.
+
+2. **Unnecessary Modifier in Interface**
+    - Masalah ini disebabkan oleh modifier `public` yang tidak diperlukan dalam method di `ProductService.java`. Yang mana hal tersebut dibenarkan dengan cara  menghapus modifier `public` karena method dalam `interface` sudah otomatis bersifat `public abstract`.
+
+
+Perbaikan ini dilakukan dengan **mengikuti rekomendasi dari PMD & CI/CD pipeline**, memastikan kode lebih bersih, lebih efisien, dan sesuai best practice.
+
+---
+
+### CI/CD Implementation & Reflection
+Menurut saya proses CI/CD yang diimplementasikan dalam repository ini sudah memenuhi **definisi Continuous Integration (CI) dan Continuous Deployment (CD)**. Hal ini bisa dilihat dari CI yang sudah bisa berjalan otomatis pada setiap push dan pull request.
+Dimana setiap ada perubahan yang di-push ke repository, maka Github Actions akan langsung menjalankan **unit test dan juga code quality analysis (PMD)**.
+Dengan ada nya **test unit otomatis dan PMD untuk analisis kode**, kesalahan perubahan kode yang dibuat bisa dapat terdeteksi terlebih dahulu sebelum di deploy. Yang mana hal tersebut saya lakukan untuk fix masalah kualitas kode.
+Lalu, setelah CI berhasil, maka merging branch bisa dilakukan ke main untuk menjalankan deploy otomatis ke dalam Koyeb, yang mana ini sesuai dengan **Continuous Deployment (CD)**.
