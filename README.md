@@ -99,3 +99,37 @@ Menurut saya proses CI/CD yang diimplementasikan dalam repository ini sudah meme
 Dimana setiap ada perubahan yang di-push ke repository, maka Github Actions akan langsung menjalankan **unit test dan juga code quality analysis (PMD)**.
 Dengan ada nya **test unit otomatis dan PMD untuk analisis kode**, kesalahan perubahan kode yang dibuat bisa dapat terdeteksi terlebih dahulu sebelum di deploy. Yang mana hal tersebut saya lakukan untuk fix masalah kualitas kode.
 Lalu, setelah CI berhasil, maka merging branch bisa dilakukan ke main untuk menjalankan deploy otomatis ke dalam Koyeb, yang mana ini sesuai dengan **Continuous Deployment (CD)**.
+
+
+## Reflection Modul 3
+
+### Implementasi SOLID
+
+1. **Single Responsibility Principle (SRP)** <br>
+   - Disini saya memisahkan product controller dan juga car controller sebagai class yang terpisah sehingga keduanya memiliki responsibily yang khusus dan berbeda.
+2. **Open-Closed Principle (OCP)**
+   - Membuat repository generic sehingga jika perlu membuat repository baru tinggal menambah fungsionalitas baru.
+     Dalam tugas ini, Product dan Car repository mengimplementasi Generic repository karena keduanya memiliki fungsionalitas yang mirip-mirip.
+     Selain itu, hal ini berguna untuk memastikan entitas repository terbuka secara perluasan (open), tetapi terutup untuk modifikasi (closed) 
+    sehingga jika kita membutuhkan fungsi yang baru di repository, kita tinggal menambahkannya secara langsung di repository spesifik tersebut.
+3. **Liskov Substitution Principle (LSP)** <br>
+    - Saya menghapus relasi inheritance pada Product dan Car Controller karena kelas turunannya, yaitu CarController, tidak dapat digunakan sebagai pengganti objek dari kelas induk ( sebab keduanya tidak ada hubungan parent-child ).
+4. **Interface Segregation Principle (ISP)**<br>
+    - Pada service, saya memecah method-method seperti CRUD dan RetrievalService menjadi interface tersendiri. Hal tersebut dilakukan agar fungsi tersebut menjadi modular
+      sehingga ketika suatu service membutuhkan fungsi tersebut, tinggal melakukan extends karena keduanya merupakan interface. 
+      Dengan melakukan tersebut, kita tidak memaksakan service untuk mengimplementasikan antarmuka (interface) yang tidak relevan bagi mereka.
+5. **Dependency Inversion Principle (DIP)** <br>
+   - Disini CarController seharusnya tidak bergantung pada concrete class karena sebagai modul level tinggi seharusnya bergantung pada level abstraksi.
+     Oleh karena itu, saya menghubungkannya pada interface ProductService, bukan ProductServiceImpl.
+
+### KEUNTUNGAN MENGGUNAKAN SOLID
+Tentunya struktur projek kita menjadi lebih jelas dan mudah untuk dibaca oleh orang lain jika berkolaborasi.
+Hal tersebut karena kita sudah membuat suatu Class atau Fungsi bekerja untuk satu tanggung jawab saja, tidak bercampur.
+Selain itu, memudahkan juga untuk kita dalam menambah fungsionalitas baru tanpa harus mengubah kode yang ada, contohnya menambahkan repository yang spesifik.
+Lalu, dengan memodularkan suatu fungsi kita bisa secara fleksibel membuat suatu service yang membutuhkan implementasi yang khusus atau spesifik. Dan terakhir dengan memastikan modul level tinggi
+bergantung pada abstrak level, akan memudahkan kita dalam memperluas fungsi tanpa memodifikasi bagian lain.
+Pada akhirnya solid ini akan membantu kita dalam pemeliharaan kode, fleksibilitas, dan scalability.
+
+### KERUGIAN TIDAK MENGGUNAKAN SOLID
+Tanpa menerapkan prinsip SOLID, struktur proyek kita bisa menjadi kurang jelas dan sulit dipahami, terutama jika kita bekerja dalam tim. Misalnya, ketika kita tidak membagi tanggung jawab dengan jelas antar kelas atau fungsi, maka kode bisa jadi tercampur aduk dan sulit untuk dimodifikasi tanpa mempengaruhi bagian lain. Hal ini membuat kolaborasi antar pengembang menjadi lebih rumit karena setiap perubahan bisa berdampak besar pada kode yang sudah ada. Selain itu, menambah fungsionalitas baru jadi lebih berisiko karena kita harus mengubah kode yang sudah ada, yang bisa menyebabkan bug baru muncul. Misalnya, jika kita ingin menambah repository spesifik, kita mungkin harus mengubah banyak bagian lain dari aplikasi, yang tidak ideal. Tanpa memodularkan fungsi, kita juga kesulitan membuat service yang spesifik dan fleksibel sesuai kebutuhan. Terakhir, tanpa Dependency Inversion Principle (DIP), kita bisa jadi bergantung langsung pada detail implementasi, yang membuat aplikasi kurang fleksibel dan sulit untuk diperluas. Pada akhirnya, tanpa SOLID, kita akan mengalami kesulitan dalam pemeliharaan kode, fleksibilitas, dan scalability, dan rentan terhadap kerusakan jangka panjang pada aplikasi.
+
