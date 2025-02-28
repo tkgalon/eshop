@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
@@ -49,12 +48,12 @@ class ProductServiceTest {
     }
 
     @Test
-    void testEditProduct() {
-        when(productRepository.edit(any(Product.class))).thenReturn(product);
-        Product updatedProduct = service.edit(product);
+    void testUpdateProduct() {
+        when(productRepository.update(any(Product.class))).thenReturn(product);
+        Product updatedProduct = service.update(product);
         assertNotNull(updatedProduct);
         assertEquals("Test Product", updatedProduct.getProductName());
-        verify(productRepository, times(1)).edit(product);
+        verify(productRepository, times(1)).update(product);
     }
 
     @Test

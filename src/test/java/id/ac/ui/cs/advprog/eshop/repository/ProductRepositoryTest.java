@@ -87,7 +87,7 @@ class ProductRepositoryTest {
 
 
     @Test
-    void testEditProductSuccess() {
+    void testUpdateProductSuccess() {
         Product product = new Product();
         product.setProductId("12345");
         product.setProductName("Nama lama Tono");
@@ -99,7 +99,7 @@ class ProductRepositoryTest {
         updatedProduct.setProductName("Nama baru Tono");
         updatedProduct.setProductQuantity(20);
 
-        Product result = productRepository.edit(updatedProduct);
+        Product result = productRepository.update(updatedProduct);
 
         assertNotNull(result);
         assertEquals("Nama baru Tono", result.getProductName());
@@ -107,18 +107,18 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void testEditProductNotFound() {
+    void testUpdateProductNotFound() {
         Product updatedProduct = new Product();
         updatedProduct.setProductId("99999");
         updatedProduct.setProductName("Hanyalah fiktif belaka");
         updatedProduct.setProductQuantity(30);
 
-        Product result = productRepository.edit(updatedProduct);
+        Product result = productRepository.update(updatedProduct);
         assertNull(result);
     }
 
     @Test
-    void testEditProductWithNullId() {
+    void testUpdateProductWithNullId() {
         Product product = new Product();
         product.setProductId("valid-id");
         product.setProductName("Produk Awal");
@@ -130,7 +130,7 @@ class ProductRepositoryTest {
         product2.setProductName("Produk Baru");
         product2.setProductQuantity(20);
 
-        Product editedProduct = productRepository.edit(product2);
+        Product editedProduct = productRepository.update(product2);
         assertNull(editedProduct);
     }
 

@@ -138,7 +138,7 @@ class ProductControllerTest {
         product.setProductId("123");
         product.setProductName("Updated Product");
         product.setProductQuantity(15);
-        when(productService.edit(any(Product.class))).thenReturn(product);
+        when(productService.update(any(Product.class))).thenReturn(product);
 
         mockMvc.perform(post("/product/edit")
                         .param("productId", "123")
