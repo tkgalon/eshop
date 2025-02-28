@@ -16,7 +16,7 @@ public class ProductRepository {
         return product;
     }
 
-    public Product edit(Product updatedProduct) {
+    public Product update(Product updatedProduct) {
         for(Product existingProduct: productData) {
             if (existingProduct.getProductId().equals(updatedProduct.getProductId())) {
                 existingProduct.setProductName(updatedProduct.getProductName());

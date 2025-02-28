@@ -63,7 +63,7 @@ public class ProductController {
             return "EditProduct";
         }
 
-        service.edit(product);
+        service.update(product);
         return "redirect:list";
     }
 
