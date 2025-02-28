@@ -1,13 +1,12 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
-import java.util.List;
+import id.ac.ui.cs.advprog.eshop.service.interfaces.Create;
+import id.ac.ui.cs.advprog.eshop.service.interfaces.Delete;
+import id.ac.ui.cs.advprog.eshop.service.interfaces.RetrieveService;
+import id.ac.ui.cs.advprog.eshop.service.interfaces.Update;
 
 
-public interface ProductService {
-    Product create(Product product);
-    Product update(Product product);
-    void delete(String id);
-    List<Product> findAll();
-    Product findById(String id);
+public interface ProductService extends Create<Product>, Update<Product>, Delete, RetrieveService<Product> {
+    // Bisa ditambahkan method spesifik jika dibutuhkan dimasa mendatang
 }
