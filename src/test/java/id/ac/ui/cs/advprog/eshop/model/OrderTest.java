@@ -90,6 +90,4 @@ public class OrderTest {
 
         assertThrows(IllegalArgumentException.class, () -> order.setStatus("MEOW"));
     }
-
-
 }
