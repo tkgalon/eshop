@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -61,16 +62,16 @@ public class PaymentTest {
         assertEquals("BANK", payment.getMethod());
         assertSame(this.paymentData, payment.getPaymentData());
 
-        assertEquals("PENDING", payment.getStatus());
+        assertEquals(PaymentStatus.PENDING.getValue(), payment.getStatus());
         paymentData.clear();
     }
 
     @Test
     void testCreatePaymentSuccessStatus() {
         initPaymentMethod("BANK");
-        Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "SUCCESS", "BANK", this.paymentData);
+        Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, PaymentStatus.SUCCESS.getValue(), "BANK", this.paymentData);
 
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         paymentData.clear();
 
     }
@@ -78,9 +79,9 @@ public class PaymentTest {
     @Test
     void testCreatePaymentRejectedStatus() {
         initPaymentMethod("BANK");
-        Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "REJECTED", "BANK", this.paymentData);
+        Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, PaymentStatus.REJECTED.getValue(), "BANK", this.paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         paymentData.clear();
     }
 
@@ -98,9 +99,9 @@ public class PaymentTest {
         initPaymentMethod("BANK");
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "BANK", this.paymentData);
 
-        payment.setStatus("SUCCESS");
+        payment.setStatus(PaymentStatus.SUCCESS.getValue());
 
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         paymentData.clear();
     }
 
@@ -109,9 +110,9 @@ public class PaymentTest {
         initPaymentMethod("BANK");
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "BANK", this.paymentData);
 
-        payment.setStatus("REJECTED");
+        payment.setStatus(PaymentStatus.REJECTED.getValue());
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         paymentData.clear();
     }
 
@@ -152,7 +153,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", "12345");
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "BANK", this.paymentData);
 
-        assertEquals("PENDING", payment.getStatus());
+        assertEquals(PaymentStatus.PENDING.getValue(), payment.getStatus());
         paymentData.clear();
     }
 
@@ -162,7 +163,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", null);
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "BANK", this.paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         paymentData.clear();
     }
 
@@ -171,7 +172,7 @@ public class PaymentTest {
     void testPaymentVoucherValid(){
         this.paymentData.put("voucherCode", "ESHOP1234ABC5678");
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "VOUCHER", this.paymentData);
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         paymentData.clear();
 
     }
@@ -180,7 +181,7 @@ public class PaymentTest {
     void testPaymentVoucherInvalid(){
         this.paymentData.put("voucherCode", "Etsopp1234ABC5678");
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "VOUCHER", this.paymentData);
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         paymentData.clear();
     }
 

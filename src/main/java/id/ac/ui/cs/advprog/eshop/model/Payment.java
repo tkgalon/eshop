@@ -1,5 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,23 +29,15 @@ public class Payment {
 
     public Payment(String id, Order order, String status, String method, Map<String, String> paymentData) {
         this(id, order, method, paymentData);
-
-        String[] statusList = {"PENDING", "REJECTED", "SUCCESS"};
-        if (Arrays.stream(statusList).noneMatch(item -> (item.equals(status)))) {
-            throw new IllegalArgumentException();
-        }
-        else {
-            this.status = status;
-        }
+        this.setStatus(status);
     }
 
     public void setStatus(String status) {
-        String[] statusList = {"PENDING", "REJECTED", "SUCCESS"};
-        if (Arrays.stream(statusList).noneMatch(item -> (item.equals(status)))) {
-            throw new IllegalArgumentException();
+        if (PaymentStatus.contains(status)) {
+            this.status = status;
         }
         else {
-            this.status = status;
+            throw new IllegalArgumentException();
         }
     }
 
@@ -54,9 +48,9 @@ public class Payment {
             String referenceCode = paymentData.get("referenceCode");
 
             if (Objects.isNull(bankName) || Objects.isNull(referenceCode) || bankName.isEmpty() || referenceCode.isEmpty()) {
-                this.status = "REJECTED";
+                this.status = PaymentStatus.REJECTED.getValue();
             } else {
-                this.status = "PENDING";
+                this.status = PaymentStatus.PENDING.getValue();
             }
         }
 
@@ -64,28 +58,28 @@ public class Payment {
             String voucherCode = paymentData.get("voucherCode");
 
             if (Objects.isNull(voucherCode) || voucherCode.isEmpty()) {
-                this.status = "REJECTED";
+                this.status = PaymentStatus.REJECTED.getValue();
                 return;
             }
 
             if (voucherCode.length() != 16) {
-                this.status = "REJECTED";
+                this.status = PaymentStatus.REJECTED.getValue();
                 return;
             }
 
 
             if (!voucherCode.startsWith("ESHOP")) {
-                this.status = "REJECTED";
+                this.status = PaymentStatus.REJECTED.getValue();
                 return;
             }
 
             long countDigits = voucherCode.chars().filter(Character::isDigit).count();
             if (countDigits != 8) {
-                this.status = "REJECTED";
+                this.status = PaymentStatus.REJECTED.getValue();
                 return;
             }
 
-            this.status = "SUCCESS";
+            this.status = PaymentStatus.SUCCESS.getValue();
         }
     }
 
