@@ -152,7 +152,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", "12345");
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "BANK", this.paymentData);
 
-        assertEquals("PENDING", payment.getMethod());
+        assertEquals("PENDING", payment.getStatus());
         paymentData.clear();
     }
 
@@ -162,7 +162,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", null);
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "BANK", this.paymentData);
 
-        assertEquals("REJECTED", payment.getMethod());
+        assertEquals("REJECTED", payment.getStatus());
         paymentData.clear();
     }
 
