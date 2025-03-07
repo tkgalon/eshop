@@ -47,7 +47,7 @@ public class PaymentRepositoryTest {
         productDataVoucher.put("voucherCode", "ESHOP1234ABC5678");
 
         Payment paymentA = new Payment("1d-untuk-p4ym4nt", order1,"BANK", paymentDataBank);
-        Payment paymentB = new Payment("2d-untuk-p4ym4nt", order1, "VOUCHER", productDataVoucher);
+        Payment paymentB = new Payment("2d-untuk-p4ym4nt", order2, "VOUCHER", productDataVoucher);
 
         payments.add(paymentA);
         payments.add(paymentB);
@@ -69,7 +69,7 @@ public class PaymentRepositoryTest {
 
     @Test
     void testSaveUpdate() {
-        Payment payment = payments.get(1);
+        Payment payment = payments.get(0);
         paymentRepository.save(payment);
 
         Map<String, String> newPaymentData = new HashMap<>();
@@ -79,14 +79,14 @@ public class PaymentRepositoryTest {
         Payment updatedPayment = new Payment("1d-untuk-p4ym4nt", payment.getOrder(),"BANK", newPaymentData);
 
         Payment result = paymentRepository.save(updatedPayment);
-        Payment findResult = paymentRepository.findById(payments.get(1).getId());
+        Payment findResult = paymentRepository.findById(payments.get(0).getId());
 
         assertEquals(payment.getId(), result.getId());
-        assertEquals(payment.getId(), findResult.getId());
-        assertEquals(payment.getOrder(), findResult.getOrder());
-        assertEquals(payment.getStatus(), findResult.getStatus());
-        assertEquals(payment.getMethod(), findResult.getMethod());
-        assertEquals(payment.getPaymentData(), findResult.getPaymentData());
+        assertEquals(result.getId(), findResult.getId());
+        assertEquals(result.getOrder(), findResult.getOrder());
+        assertEquals(result.getStatus(), findResult.getStatus());
+        assertEquals(result.getMethod(), findResult.getMethod());
+        assertEquals(result.getPaymentData(), findResult.getPaymentData());
     }
 
     @Test
