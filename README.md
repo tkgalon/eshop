@@ -131,5 +131,32 @@ bergantung pada abstrak level, akan memudahkan kita dalam memperluas fungsi tanp
 Pada akhirnya solid ini akan membantu kita dalam pemeliharaan kode, fleksibilitas, dan scalability.
 
 ### KERUGIAN TIDAK MENGGUNAKAN SOLID
-Tanpa menerapkan prinsip SOLID, struktur proyek kita bisa menjadi kurang jelas dan sulit dipahami, terutama jika kita bekerja dalam tim. Misalnya, ketika kita tidak membagi tanggung jawab dengan jelas antar kelas atau fungsi, maka kode bisa jadi tercampur aduk dan sulit untuk dimodifikasi tanpa mempengaruhi bagian lain. Hal ini membuat kolaborasi antar pengembang menjadi lebih rumit karena setiap perubahan bisa berdampak besar pada kode yang sudah ada. Selain itu, menambah fungsionalitas baru jadi lebih berisiko karena kita harus mengubah kode yang sudah ada, yang bisa menyebabkan bug baru muncul. Misalnya, jika kita ingin menambah repository spesifik, kita mungkin harus mengubah banyak bagian lain dari aplikasi, yang tidak ideal. Tanpa memodularkan fungsi, kita juga kesulitan membuat service yang spesifik dan fleksibel sesuai kebutuhan. Terakhir, tanpa Dependency Inversion Principle (DIP), kita bisa jadi bergantung langsung pada detail implementasi, yang membuat aplikasi kurang fleksibel dan sulit untuk diperluas. Pada akhirnya, tanpa SOLID, kita akan mengalami kesulitan dalam pemeliharaan kode, fleksibilitas, dan scalability, dan rentan terhadap kerusakan jangka panjang pada aplikasi.
+Tanpa menerapkan prinsip SOLID, struktur proyek kita bisa menjadi kurang jelas dan sulit dipahami, terutama jika kita bekerja dalam tim. Misalnya, ketika kita tidak membagi tanggung jawab dengan jelas antar kelas atau fungsi, maka kode bisa jadi tercampur aduk dan sulit untuk dimodifikasi tanpa mempengaruhi bagian lain. Hal ini membuat kolaborasi antar pengembang menjadi lebih rumit karena setiap perubahan bisa berdampak besar pada kode yang sudah ada. Selain itu, menambah fungsionalitas baru jadi lebih berisiko karena kita harus mengubah kode yang sudah ada, yang bisa menyebabkan bug baru muncul. Misalnya, jika kita ingin menambah repository spesifik, kita mungkin harus mengubah banyak bagian lain dari aplikasi, yang tidak ideal. Tanpa memodularkan fungsi, kita juga kesulitan membuat service yang spesifik dan fleksibel sesuai kebutuhan. Terakhir, tanpa Dependency Inversion Principle (DIP), kita bisa jadi bergantung langsung pada detail implementasi, yang membuat aplikasi kurang fleksibel dan sulit untuk diperluas. Pada akhirnya, tanpa SOLID, kita akan mengalami kesulitan dalam pemeliharaan kode, fleksibilitas, dan scalability, dan rentan terhadap kerusakan jangka panjang pada aplikasi.   
+
+---
+## Reflection Modul 4
+
+### MANFAAT TTD YANG SAYA RASAKAN
+Dalam Modul ini, saya mencoba untuk mengikuti Test-Driven Development (TDD) Workflow, yang terdiri dari siklus RED → GREEN → REFACTOR.
+Pada awalnya, saya merasa bahwa metode ini cukup sulit karena kita harus menulis tes terlebih dahulu sebelum mengimplementasikan kode sebenarnya.
+Jadi, saya merasa seperti mengawang-ngawang dalam menvisualisasi apa yang akan diimplemntasikan.
+Namun, setelah mengerjakan beberapa class selama proses pengerjaan, saya mulai memahami bahwa pendekatan ini memiliki banyak manfaat dalam memastikan bahwa kode yang dibuat benar-benar berjalan sesuai ekspektasi sejak awal.
+Hal tersebut mempermudah saya dalam memastikan implentasinya benar.
+
+1. Apakah mendapatkan umpan balik dengan cepat?
+<br> Iya, TDD memungkinkan saya mengetahui sejak awal apakah kode yang ditulis sudah sesuai dengan spesifikasi atau masih perlu perbaikan.
+2. Apakah  percaya dengan hasil tes yang buat?
+<br> Mungkin karena baru pertama kali menggunakan metode ini, saya sedikit skeptis apakah hal tersebut berjalan lancar, tetapi berdasarkan test yang sudah dibuatsih
+seharusnya sudah aman.
+3. Apakah  cukup menulis tes untuk menangkap kemungkinan kesalahan?
+<br> Mungkin cukup, tetapi harus memikirkan setiap edge casenya dan evaluasi lagi.
+4. Apakah dengan ttd bisa membuat debuggin menjadi lebih mudah karena adanya tes?
+<br> Yoi, lebih mudah karena kita tahu spesifikasi apa yang dilanggar.
+
+### Evaluasi Unit Test Berdasarkan F.I.R.S.T. Principle
+Dalam unit test yang saya buat, sebagian besar telah mengikuti prinsip F.I.R.S.T..
+Dimana tes yang saya jalankan cukup cepat (Fast) karena hanya menguji unit kecil tanpa ketergantungan eksternal.
+Lalu, independen (Independent) karena setiap tes bisa dijalankan sendiri tanpa mempengaruhi tes lainnya.
+Selain itu, dapat diulang (Repeatable) dengan hasil yang konsisten, dan self-validating (Self-Validating) karena setiap tes memiliki hasil jelas, apakah lulus atau gagal.
+Untuk aspek tepat waktu (Timely), sepertinya saya sudah mengimplementasikan ttd dari step awal, dari RED->GREEN->REFACTOR.
 
