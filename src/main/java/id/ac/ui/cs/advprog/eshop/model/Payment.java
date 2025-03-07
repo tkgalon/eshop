@@ -73,6 +73,7 @@ public class Payment {
                 return;
             }
 
+
             if (!voucherCode.startsWith("ESHOP")) {
                 this.status = "REJECTED";
                 return;
