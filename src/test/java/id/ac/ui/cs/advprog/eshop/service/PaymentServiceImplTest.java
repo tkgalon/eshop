@@ -60,6 +60,9 @@ public class PaymentServiceImplTest {
         assertEquals(PaymentStatus.PENDING.getValue(), result.getStatus());
         assertEquals("BANK", result.getMethod());
         verify(paymentRepository, times(1)).save(any(Payment.class));
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -68,6 +71,9 @@ public class PaymentServiceImplTest {
         Payment result = paymentService.addPayment(order, "BANK", paymentDataBank);
 
         assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -81,6 +87,9 @@ public class PaymentServiceImplTest {
         assertEquals(PaymentStatus.SUCCESS.getValue(), result.getStatus());
         assertEquals("VOUCHER", result.getMethod());
         verify(paymentRepository, times(1)).save(any(Payment.class));
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -89,6 +98,9 @@ public class PaymentServiceImplTest {
         Payment result = paymentService.addPayment(order, "VOUCHER", paymentDataVoucher);
 
         assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -101,6 +113,9 @@ public class PaymentServiceImplTest {
         assertEquals(PaymentStatus.SUCCESS.getValue(), result.getStatus());
         assertEquals("SUCCESS", order.getStatus());
         verify(paymentRepository, times(1)).save(payment);
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -113,12 +128,18 @@ public class PaymentServiceImplTest {
         assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
         assertEquals("FAILED", order.getStatus());
         verify(paymentRepository, times(1)).save(payment);
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
     void testSetStatusInvalid() {
         Payment payment = new Payment(order.getId(), order, PaymentStatus.PENDING.getValue(), "BANK", paymentDataBank);
         assertThrows(IllegalArgumentException.class, () -> paymentService.setStatus(payment, "INVALID"));
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -131,6 +152,9 @@ public class PaymentServiceImplTest {
         assertNotNull(result);
         assertEquals(order.getId(), result.getId());
         verify(paymentRepository, times(1)).findById(order.getId());
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -140,6 +164,9 @@ public class PaymentServiceImplTest {
         Payment result = paymentService.getPayment("invalid");
 
         assertNull(result);
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 
     @Test
@@ -150,5 +177,8 @@ public class PaymentServiceImplTest {
 
         assertEquals(1, result.size());
         verify(paymentRepository, times(1)).findAll();
+
+        paymentDataBank.clear();
+        paymentDataVoucher.clear();
     }
 }
