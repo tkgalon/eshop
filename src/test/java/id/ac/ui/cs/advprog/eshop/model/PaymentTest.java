@@ -57,7 +57,7 @@ public class PaymentTest {
         Payment payment = new Payment("1d-untuk-p4ym4nt", this.order, "BANK", this.paymentData);
 
         // Check data inserted
-        assertSame(this.order, payment.getOrders());
+        assertSame(this.order, payment.getOrder());
         assertEquals("BANK", payment.getMethod());
         assertSame(this.paymentData, payment.getPaymentData());
 
